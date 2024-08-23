@@ -145,7 +145,7 @@ class GoogleCloudCpp(CMakePackage):
             if self.spec.satisfies("-storage") and "storage" in libs:
                 del libs["storage"]
 
-            if len(libs) > 1 or (len(libs) == 1 and "storage" not in libs):
+            if len(libs) == 0 or (len(libs) == 1 and "storage" not in libs) or len(libs) > 1:       
                 depends_on("grpc")
                 depends_on("protobuf")
                 
