@@ -157,7 +157,8 @@ class GoogleCloudCpp(CMakePackage):
         spec = self.spec
         args = [
             self.define("BUILD_TESTING", False),
-            self.define("GOOGLE_CLOUD_CPP_ENABLE_EXAMPLES", False)
+            self.define("GOOGLE_CLOUD_CPP_ENABLE_EXAMPLES", False),
+            self.define("GOOGLE_CLOUD_CPP_WITH_MOCKS", False)
         ]
 
         if "+shared" in spec:
