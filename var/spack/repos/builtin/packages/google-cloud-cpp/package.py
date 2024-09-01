@@ -6,19 +6,19 @@
 from spack.package import *
 
 
-# def gatherLibs(spec):
-#     allLibs = ["iam","spanner","bigtable","bigquery","logging","pubsub","storage"]
-#     libs = {}
+def gatherLibs(spec):
+    allLibs = ["iam","spanner","bigtable","bigquery","logging","pubsub","storage"]
+    libs = {}
         
-#     for lib in allLibs:
-#         includeLib = "+" + lib
-#         excludeLib = "-" + lib
-#         if includeLib in spec:
-#             libs[lib] = True
-#         if excludeLib in spec and lib in libs:
-#             del libs[lib]
+    for lib in allLibs:
+        includeLib = "+" + lib
+        excludeLib = "-" + lib
+        if includeLib in spec:
+            libs[lib] = True
+        if excludeLib in spec and lib in libs:
+            del libs[lib]
 
-#     return libs
+    return libs
 
 
 class GoogleCloudCpp(CMakePackage):
@@ -66,7 +66,6 @@ class GoogleCloudCpp(CMakePackage):
             libs[lib] = True
         with when(excludeLib):
             del libs[lib]
-    libsAsString = ",".join(list(returnLibs.keys()))    
 
     for lib in libs:
         variant(lib, default=False, description=f"Compile the {lib} library")
@@ -167,17 +166,18 @@ class GoogleCloudCpp(CMakePackage):
         if "+all" in spec:
             args.append(self.define("GOOGLE_CLOUD_CPP_ENABLE", "__ga_libraries__"))
         else:
-            allLibs = ["iam","spanner","bigtable","bigquery","logging","pubsub","storage"]
-            libsDict = {}
+            libs = gatherLibs(spec)
+            # allLibs = ["iam","spanner","bigtable","bigquery","logging","pubsub","storage"]
+            # libsDict = {}
         
-            for lib in allLibs:
-                includeLib = "+" + lib
-                excludeLib = "-" + lib
-                if includeLib in spec:
-                    libsDict[lib] = True
-                if excludeLib in spec and lib in libs:
-                    del libsDict[lib]
-            libs = ",".join(list(libsDict.keys()))
+            # for lib in allLibs:
+            #     includeLib = "+" + lib
+            #     excludeLib = "-" + lib
+            #     if includeLib in spec:
+            #         libsDict[lib] = True
+            #     if excludeLib in spec and lib in libs:
+            #         del libsDict[lib]
+            # libs = ",".join(list(libsDict.keys()))
     
             # libs = {}
             # if self.spec.satisfies("+iam"):
@@ -220,8 +220,8 @@ class GoogleCloudCpp(CMakePackage):
             #     depends_on("protobuf")
             # libs = gatherLibs(self)
             #libs = self.libs.split(",")
-            if len(libsDict) > 0:
-                args.append(self.define("GOOGLE_CLOUD_CPP_ENABLE", libs))
+            if len(libs) > 0:
+                args.append(self.define("GOOGLE_CLOUD_CPP_ENABLE", ",".join(list(libs.keys()))))
 
             # If no libs are specified and +all is not specified, then the default libraries will be compiled.  Please see the google-cloud-cpp website for more information on the latest default libraries that will be installed.
         
