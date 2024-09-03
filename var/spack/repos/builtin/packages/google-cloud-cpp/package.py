@@ -7,7 +7,86 @@ from spack.package import *
 
 
 def gatherLibs(spec):
-    allLibs = ["iam","spanner","bigtable","bigquery","logging","pubsub","storage"]
+    allLibs = [
+        "accessapproval",
+        "accesscontextmanager",
+        "advisorynotifications",
+        "aiplatform",
+        "alloydb",
+        "apigateway",
+        "apigeeconnect",
+        "apikeys",
+        "appengine",
+        "apphub",
+        "artifactregistry",
+        "asset",
+        "assuredworkloads",
+        "automl",
+        "backupdr",
+        "bigquery",
+        "bigtable",        
+        "billing",
+        "certificatemanager",
+        "commerce",
+        "composer",
+        "compute",
+        "config",
+        "connectors",
+        "datastore",
+        "deploy",
+        "filestore",
+        "functions",
+        "grpc_utils",
+        "iam",
+        "iap",
+        "ids",
+        "kms",
+        "language",
+        "logging",
+        "memcache",
+        "monitoring",
+        "netapp",
+        "networkconnectivity",
+        "networkmanagement",
+        "networksecurity",
+        "networkservices",
+        "notebooks",
+        "oath2",
+        "opentelemetry",
+        "optimization",
+        "orgpolicy",
+        "osconfig",
+        "privateca",
+        "profiler",
+        "publicca",
+        "pubsub",
+        "pubsublite",
+        "recommender",
+        "redis",
+        "retail",
+        "run",
+        "scheduler",
+        "servicecontrol",
+        "servicehealth",
+        "serviceusage",
+        "shell",
+        "spanner",
+        "sql",
+        "storage",
+        "support",
+        "talent",
+        "tasks",
+        "texttospeech",
+        "tpu",
+        "trace",
+        "translate",
+        "video",
+        "vision",
+        "vpcaccess",
+        "webrisk",
+        "workflows",
+        "workstations"
+    ]
     libs = {}
         
     for lib in allLibs:
@@ -56,7 +135,86 @@ class GoogleCloudCpp(CMakePackage):
         description="compile the libraries as shared libraries",
     )
 
-    allLibs = ["iam","spanner","bigtable","bigquery","logging","pubsub","storage"]
+    allLibs = [
+        "accessapproval",
+        "accesscontextmanager",
+        "advisorynotifications",
+        "aiplatform",
+        "alloydb",
+        "apigateway",
+        "apigeeconnect",
+        "apikeys",
+        "appengine",
+        "apphub",
+        "artifactregistry",
+        "asset",
+        "assuredworkloads",
+        "automl",
+        "backupdr",
+        "bigquery",
+        "bigtable",        
+        "billing",
+        "certificatemanager",
+        "commerce",
+        "composer",
+        "compute",
+        "config",
+        "connectors",
+        "datastore",
+        "deploy",
+        "filestore",
+        "functions",
+        "grpc_utils",
+        "iam",
+        "iap",
+        "ids",
+        "kms",
+        "language",
+        "logging",
+        "memcache",
+        "monitoring",
+        "netapp",
+        "networkconnectivity",
+        "networkmanagement",
+        "networksecurity",
+        "networkservices",
+        "notebooks",
+        "oath2",
+        "opentelemetry",
+        "optimization",
+        "orgpolicy",
+        "osconfig",
+        "privateca",
+        "profiler",
+        "publicca",
+        "pubsub",
+        "pubsublite",
+        "recommender",
+        "redis",
+        "retail",
+        "run",
+        "scheduler",
+        "servicecontrol",
+        "servicehealth",
+        "serviceusage",
+        "shell",
+        "spanner",
+        "sql",
+        "storage",
+        "support",
+        "talent",
+        "tasks",
+        "texttospeech",
+        "tpu",
+        "trace",
+        "translate",
+        "video",
+        "vision",
+        "vpcaccess",
+        "webrisk",
+        "workflows",
+        "workstations"
+    ]    
     libs = {}
         
     for lib in allLibs:
@@ -74,70 +232,6 @@ class GoogleCloudCpp(CMakePackage):
         depends_on("grpc")
         depends_on("protobuf")
         
-    # @property
-    # def libs(spec):
-    #     allLibs = ["iam","spanner","bigtable","bigquery","logging","pubsub","storage"]
-    #     returnLibs = {}
-        
-    #     for lib in allLibs:
-    #         includeLib = "+" + lib
-    #         excludeLib = "-" + lib
-    #         if includeLib in spec:
-    #             returnLibs[lib] = True
-    #         if excludeLib in spec and lib in libs:
-    #             del returnLibs[lib]
-    #     return ",".join(list(returnLibs.keys()))
-    # libs = gatherLibs(self.spec)
-
-    # def generateLibraryVariants(self):
-    #     libs = self.libs.split(",")
-    #     for lib in libs:
-    #         variant(lib, default=False, description=f"Compile the {lib} library")
-    
-    # variant(
-    #     "iam",
-    #     default=False,
-    #     description="Compile the iam library",
-    # )
-
-    # variant(
-    #     "spanner",
-    #     default=False,
-    #     description="Compile the spanner library",
-    # )
-
-    # variant(
-    #     "bigtable",
-    #     default=False,
-    #     description="Compile the bigtable library",
-    # )
-
-    # variant(
-    #     "bigquery",
-    #     default=False,
-    #     description="Compile the bigquery library",
-    # )
-
-    # variant(
-    #     "logging",
-    #     default=False,
-    #     description="Compile the logging library",
-    # )
-
-    # variant(
-    #     "pubsub",
-    #     default=False,
-    #     description="Compile the pubsub library",
-    # )
-
-    # variant(
-    #     "storage",
-    #     default=False,
-    #     description="Compile the storage library",
-    # )        
-
-
-    
     generator("ninja")
     
     depends_on("ninja", type="build")
@@ -147,12 +241,9 @@ class GoogleCloudCpp(CMakePackage):
     depends_on("openssl")
     depends_on("nlohmann-json")
 
-    # def generateLibConditionalDependencies(self):
-    #     libs = self.libs.split(",")
-    #     if len(libs) == 0 or (len(libs) == 1 and "storage" not in libs) or len(libs) > 1:
-    #         depends_on("grpc")
-    #         depends_on("protobuf")
-
+    def setup_run_environment(self, env):
+        env.prepend_path("CMAKE_PREFIX_PATH", self.prefix)        
+    
     def cmake_args(self):
         spec = self.spec
         args = [
@@ -168,62 +259,11 @@ class GoogleCloudCpp(CMakePackage):
             args.append(self.define("GOOGLE_CLOUD_CPP_ENABLE", "__ga_libraries__"))
         else:
             libs = gatherLibs(spec)
-            # allLibs = ["iam","spanner","bigtable","bigquery","logging","pubsub","storage"]
-            # libsDict = {}
-        
-            # for lib in allLibs:
-            #     includeLib = "+" + lib
-            #     excludeLib = "-" + lib
-            #     if includeLib in spec:
-            #         libsDict[lib] = True
-            #     if excludeLib in spec and lib in libs:
-            #         del libsDict[lib]
-            # libs = ",".join(list(libsDict.keys()))
-    
-            # libs = {}
-            # if self.spec.satisfies("+iam"):
-            #     libs["iam"] = True
-            # if self.spec.satisfies("-iam") and "iam" in libs:
-            #     del libs["iam"]
 
-            # if self.spec.satisfies("+spanner"):
-            #     libs["spanner"] = True
-            # if self.spec.satisfies("-spanner") and "spanner" in libs:
-            #     del libs["spanner"]                
-
-            # if self.spec.satisfies("+bigtable"):
-            #     libs["bigtable"] = True
-            # if self.spec.satisfies("-bigtable") and "bigtable" in libs:
-            #     del libs["bigtable"]
-
-            # if self.spec.satisfies("+bigquery"):
-            #     libs["bigquery"] = True
-            # if self.spec.satisfies("-bigquery") and "bigquery" in libs:
-            #     del libs["bigquery"]
-
-            # if self.spec.satisfies("+logging"):
-            #     libs["logging"] = True
-            # if self.spec.satisfies("-logging") and "logging" in libs:
-            #     del libs["logging"]
-
-            # if self.spec.satisfies("+pubsub"):
-            #     libs["pubsub"] = True
-            # if self.spec.satisfies("-pubsub") and "pubsub" in libs:
-            #     del libs["pubsub"]
-
-            # if self.spec.satisfies("+storage"):
-            #     libs["storage"] = True
-            # if self.spec.satisfies("-storage") and "storage" in libs:
-            #     del libs["storage"]
-
-            # if len(libs) == 0 or (len(libs) == 1 and "storage" not in libs) or len(libs) > 1:
-            #     depends_on("grpc")
-            #     depends_on("protobuf")
-            # libs = gatherLibs(self)
-            #libs = self.libs.split(",")
             if len(libs) > 0:
                 args.append(self.define("GOOGLE_CLOUD_CPP_ENABLE", ",".join(list(libs.keys()))))
 
             # If no libs are specified and +all is not specified, then the default libraries will be compiled.  Please see the google-cloud-cpp website for more information on the latest default libraries that will be installed.
         
         return args
+
